@@ -3,7 +3,7 @@ Postbode.nu fluent API client for Laravel
 
 ## Usage
 
-```
+```php
 // Send immediately
 $this->apiClient->setLetter($letter)->sendLetter();
 
@@ -41,7 +41,7 @@ Fluent camelcased setters and getters are available for:
 
 Add `config/postbode.php`;
 
-```
+```php
 <?php
 
 return [
