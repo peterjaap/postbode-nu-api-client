@@ -12,6 +12,13 @@ collect($letters)->each(function ($letter) {
     $this->apiClient->addLetterToQueue($letter);
 });
 $this->apiClient->sendLetterQueue();
+
+// Send immediately with runtime configuration
+$this->apiClient
+    ->setLetter($letter)
+    ->setColor(\Api\Client\PostbodeNuApiClient::COLOR_BW)
+    ->setSides(\Api\Client\PostbodeNuApiClient::PRINT_ONESIDED)
+    ->sendLetter();
 ```
 
 ## Available methods
