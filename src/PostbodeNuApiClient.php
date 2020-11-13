@@ -11,15 +11,15 @@ use GuzzleHttp\Exception\GuzzleException;
  */
 class PostbodeNuApiClient extends Client
 {
-    protected const DEFAULT_ENVELOPE = 2;
-    protected const STATUS_SEND = true;
-    protected const STATUS_CONCEPT = false;
-    protected const COLOR_BLACK_WHITE = 'BW';
-    protected const COLOR_FULL = 'FC';
-    protected const PRINT_ONESIDED = 'simplex';
-    protected const PRINT_TWOSIDED = 'duplex';
-    protected const PRINTER_INKJET = 'inkjet';
-    protected const PRINTER_TONER = 'toner';
+    public const DEFAULT_ENVELOPE = 2;
+    public const STATUS_SEND = true;
+    public const STATUS_CONCEPT = false;
+    public const COLOR_BLACK_WHITE = 'BW';
+    public const COLOR_FULL = 'FC';
+    public const PRINT_ONESIDED = 'simplex';
+    public const PRINT_TWOSIDED = 'duplex';
+    public const PRINTER_INKJET = 'inkjet';
+    public const PRINTER_TONER = 'toner';
 
     /**
      * @var bool
@@ -48,7 +48,7 @@ class PostbodeNuApiClient extends Client
     /**
      * @var string
      */
-    protected $countryCode = 'NL';
+    protected $country_code = 'NL';
     /**
      * @var Letter
      */
@@ -244,9 +244,9 @@ class PostbodeNuApiClient extends Client
      * @param $countryCode
      * @return PostbodeNuApiClient
      */
-    public function setCountryCOde($countryCode): PostbodeNuApiClient
+    public function setCountryCode($countryCode): PostbodeNuApiClient
     {
-        $this->countryCode = $countryCode;
+        $this->country_code = $countryCode;
         return $this;
     }
 
@@ -339,6 +339,6 @@ class PostbodeNuApiClient extends Client
      */
     public function getCountryCode()
     {
-        return $this->countryCode;
+        return $this->country_code;
     }
 }
