@@ -145,6 +145,8 @@ class PostbodeNuApiClient extends Client
         if ($this->getCoverAddress()) {
             $data['json']['cover_address'] = $this->getCoverAddress();
         }
+        
+        return $data;
     }
 
     /**
