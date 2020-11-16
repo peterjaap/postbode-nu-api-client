@@ -61,6 +61,14 @@ class PostbodeNuApiClient extends Client
      * @var int
      */
     protected $mailboxId;
+    /**
+     * @var string
+     */
+    protected $coverAddress;
+    /**
+     * @var string
+     */
+    protected $registered;
 
     /**
      * PostbodeNuApiClient constructor.
@@ -115,7 +123,7 @@ class PostbodeNuApiClient extends Client
      */
     private function buildLetterData()
     {
-        return [
+        $data = [
             'json' => [
                 'documents' => [
                     [
@@ -133,6 +141,10 @@ class PostbodeNuApiClient extends Client
                 'metadata' => $this->getMetadata(),
             ],
         ];
+
+        if ($this->getCoverAddress()) {
+            $data['json']['cover_address'] = $this->getCoverAddress();
+        }
     }
 
     /**
@@ -201,6 +213,8 @@ class PostbodeNuApiClient extends Client
     }
 
     /**
+     * When status is STATUS_CONCEPT, letter will be placed as concept to be sent later manually
+     *
      * @param $status
      * @return PostbodeNuApiClient
      */
@@ -261,12 +275,36 @@ class PostbodeNuApiClient extends Client
     }
 
     /**
+     * Standard 2 ( C5 window left) or custom envelop
+     *
      * @param $envelope
      * @return PostbodeNuApiClient
      */
     public function setEnvelope($envelope): PostbodeNuApiClient
     {
         $this->envelope = $envelope;
+        return $this;
+    }
+
+    /**
+     * When provided an empty paper with the address will be generated in front of content
+     *
+     * @param string $coverAddress
+     * @return PostbodeNuApiClient
+     */
+    public function setCoverAddress(string $coverAddress): PostbodeNuApiClient
+    {
+        $this->coverAddress = $coverAddress;
+        return $this;
+    }
+
+    /**
+     * @param bool $registered
+     * @return PostbodeNuApiClient
+     */
+    public function setRegistered(bool $registered): PostbodeNuApiClient
+    {
+        $this->registered = $registered;
         return $this;
     }
 
@@ -327,6 +365,8 @@ class PostbodeNuApiClient extends Client
     }
 
     /**
+     * Extra data that will be returned to the mailbox webhook url
+     *
      * @return array
      */
     public function getMetadata()
@@ -340,5 +380,21 @@ class PostbodeNuApiClient extends Client
     public function getCountryCode()
     {
         return $this->country_code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCoverAddress(): string
+    {
+        return $this->coverAddress;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getRegistered(): bool
+    {
+        return $this->registered;
     }
 }
