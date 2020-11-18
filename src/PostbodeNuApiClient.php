@@ -16,8 +16,8 @@ class PostbodeNuApiClient extends Client
     public const STATUS_CONCEPT = false;
     public const COLOR_BLACK_WHITE = 'BW';
     public const COLOR_FULL = 'FC';
-    public const PRINT_ONESIDED = 'simplex';
-    public const PRINT_TWOSIDED = 'duplex';
+    public const PRINTING_ONESIDED = 'simplex';
+    public const PRINTING_TWOSIDED = 'duplex';
     public const PRINTER_INKJET = 'inkjet';
     public const PRINTER_TONER = 'toner';
 
@@ -28,11 +28,11 @@ class PostbodeNuApiClient extends Client
     /**
      * @var string
      */
-    protected $printer = self::PRINT_TWOSIDED;
+    protected $printer = self::PRINTER_INKJET;
     /**
      * @var string
      */
-    protected $sides = self::PRINT_TWOSIDED;
+    protected $sides = self::PRINTING_TWOSIDED;
     /**
      * @var string
      */
@@ -145,7 +145,7 @@ class PostbodeNuApiClient extends Client
         if ($this->getCoverAddress()) {
             $data['json']['cover_address'] = $this->getCoverAddress();
         }
-        
+
         return $data;
     }
 
@@ -387,7 +387,7 @@ class PostbodeNuApiClient extends Client
     /**
      * @return string
      */
-    public function getCoverAddress(): string
+    public function getCoverAddress(): ?string
     {
         return $this->coverAddress;
     }
